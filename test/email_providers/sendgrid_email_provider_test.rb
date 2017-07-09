@@ -14,5 +14,4 @@ class SendgridEmailProviderTest < ActiveSupport::TestCase
     assert_equal formatted_attributes[:personalizations].first[:to].first[:email], 'rishav.rastogi@gmail.com'
   end
 
-
 end

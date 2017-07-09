@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709145925) do
+ActiveRecord::Schema.define(version: 20170709171311) do
+
+  create_table "active_email_providers", force: :cascade do |t|
+    t.string "name"
+    t.text "api_params"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "bright_wheel_emails", force: :cascade do |t|
     t.string "to", limit: 191
@@ -19,6 +26,13 @@ ActiveRecord::Schema.define(version: 20170709145925) do
     t.string "from_name"
     t.string "subject"
     t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "email_providers", force: :cascade do |t|
+    t.string "name"
+    t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

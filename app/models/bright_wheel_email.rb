@@ -1,5 +1,4 @@
 class BrightWheelEmail < ApplicationRecord
-  HTML_TAG_WHITELIST = %w[a p div table th tr td img]
 
   validates :to, presence: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }
   validates :to_name, presence: true

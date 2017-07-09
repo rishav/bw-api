@@ -26,8 +26,14 @@ There is a EmailProviders table that I use to decide which is the current active
 
 ## Future Enhancements
 
-* Cleanup tests
-* EmailProviders should be integrated in ActionMailer and used as a delivery_method
-* Abstract out MailGun and Sendgrid EmailProvider with base methods and behavior , further enhance this by storing responses from each provider and storing them for review later
+* Cleanup some of the tests, one or two integration tests.
+* There is crummy delegator code in email_provider.rb, needs cleanup
+* This whole thing can integrated into ActionMailer and used as a delivery_method
+* Abstract out MailGun and Sendgrid EmailProvider with base methods and behavior, further enhance this by storing responses from each provider and storing them for review later
 * Currently only sending an HTML version of the body, not sending a plain text version of the email which would be simple to add.
 * Using Sanitize to clean the body html, may need to look deeper into what type of HTML tags we should whitelist
+
+## Note
+
+* My Sendgrid account was suspended while running final tests. May need to update once I get a response from their support.
+* Mailgun has a domain setting, which might be necessary to test this, I tested this with the "from email" provided with the test domain mailgun provides when setting up the account

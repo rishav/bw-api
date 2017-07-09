@@ -10,7 +10,7 @@ class BrightWheelEmail < ApplicationRecord
 
   before_save :sanitize_body
 
-  after_commit :send_email
+  after_commit :send_email, on: :create
 
   def mailable_attributes
     {to: to, to_name: to_name, from: from, from_name: from_name, subject: subject, body: body}

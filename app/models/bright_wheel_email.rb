@@ -1,0 +1,2 @@
+class BrightWheelEmail < ApplicationRecord
+end

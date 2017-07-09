@@ -13,6 +13,7 @@
 * `export MAILGUN_API_KEY='YOUR_API_KEY'`
 * `export SENDGRID_API_KEY='YOUR_API_KEY'`
 * `bin/rails s`
+* `redis-server`
 * `bundle exec sidekiq` (Please remember to export the API keys using above command when running this or whereever running any rails console or server)
 
 ## To Run tests

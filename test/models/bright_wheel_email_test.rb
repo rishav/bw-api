@@ -26,16 +26,13 @@ class BrightWheelEmailTest < ActiveSupport::TestCase
 
   test 'should sanitize html before storing' do
     # testing to see if it removes the script tag
-    EmailProvider.stubs(:send_email)
+    SendEmailJob.stubs(:perform_later)
     bw_email = create(:bright_wheel_email)
     assert bw_email.body.index('<script>').nil?
   end
 
   test 'should trigger email' do
-    bw_email = build(:bright_wheel_email, body: 'Hello')
-    mailable_attributes = mock()
-    bw_email.expects(:mailable_attributes).returns(mailable_attributes)
-    EmailProvider.expects(:send_email).with(mailable_attributes)
-    bw_email.save
+    SendEmailJob.expects(:perform_later)
+    bw_email = create(:bright_wheel_email)
   end
 end

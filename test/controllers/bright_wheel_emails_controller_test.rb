@@ -9,6 +9,7 @@ class BrightWheelEmailsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create email record with valid params" do
+    SendEmailJob.stubs(:perform_later)
     assert_difference 'BrightWheelEmail.count' do
       post post_email_url, params: build(:bright_wheel_email).attributes
       json_response = JSON.parse(response.body)

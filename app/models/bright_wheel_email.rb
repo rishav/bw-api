@@ -23,7 +23,7 @@ class BrightWheelEmail < ApplicationRecord
   end
 
   def send_email
-    EmailProvider.send_email(mailable_attributes)
+    SendEmailJob.perform_later(self.id)
   end
 
 end

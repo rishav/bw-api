@@ -1,5 +1,5 @@
 class MailgunEmailProvider
-  API_KEY = 'key-dbb1491132ed334586717263b30dcd45'.freeze
+  API_KEY = ENV['MAILGUN_API_KEY']
   URL = 'https://api.mailgun.net/v3/sandboxa777ba7070f0423087c3f392065f30fc.mailgun.org/messages'.freeze
 
   def self.deliver!(attributes)

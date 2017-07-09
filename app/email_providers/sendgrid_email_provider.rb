@@ -1,6 +1,6 @@
 class SendgridEmailProvider
   URL = 'https://api.sendgrid.com/v3/mail/send'.freeze
-  API_KEY = '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' #ENV['SENDGRID_API_KEY']
+  API_KEY = ENV['SENDGRID_API_KEY']
 
   def self.deliver!(attributes)
     curl = Curl::Easy.new(URL)
@@ -20,5 +20,5 @@ class SendgridEmailProvider
     formatted_attributes[:content] = [{ type: 'text/html', value: attributes[:body]}]
     return formatted_attributes
   end
-  
+
 end

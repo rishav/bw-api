@@ -2,18 +2,27 @@ require 'test_helper'
 
 class MailgunEmailProviderTest < ActiveSupport::TestCase
   test 'mock request' do
-    attributes = { to: ' Rishav Rastogi <rishav.rastogi@gmail.com>' , from: 'Mailgun Sandbox <postmaster@sandboxa777ba7070f0423087c3f392065f30fc.mailgun.org>' , body: '<html><body> <b> HTML TEST </b></html>', subject: 'Hello HTML'}
+    attributes = build(:bright_wheel_email).attributes.symbolize_keys
+    formatted_attributes = MailgunEmailProvider.formatted_attributes(attributes)
     curl = mock()
     content_mock = mock()
     Curl::Easy.expects(:new).returns(curl)
     curl.expects(:http_auth_types=)
     curl.expects(:username=)
     curl.expects(:password=)
-    Curl::PostField.expects(:content).with('to', attributes[:to]).returns(content_mock)
-    Curl::PostField.expects(:content).with('from', attributes[:from]).returns(content_mock)
-    Curl::PostField.expects(:content).with('subject', attributes[:subject]).returns(content_mock)
-    Curl::PostField.expects(:content).with('html', attributes[:body]).returns(content_mock)
+    Curl::PostField.expects(:content).with('to', formatted_attributes[:to]).returns(content_mock)
+    Curl::PostField.expects(:content).with('from', formatted_attributes[:from]).returns(content_mock)
+    Curl::PostField.expects(:content).with('subject', formatted_attributes[:subject]).returns(content_mock)
+    Curl::PostField.expects(:content).with('html', formatted_attributes[:html]).returns(content_mock)
     curl.expects(:http_post).with(content_mock, content_mock, content_mock, content_mock)
     MailgunEmailProvider.deliver!(attributes)
   end
+
+  test 'formatted attributes' do
+    attributes = build(:bright_wheel_email, to: 'rishav.rastogi@gmail.com', to_name: 'rishav rastogi', from: "test@example.com" ).attributes.symbolize_keys
+    formatted_attributes = MailgunEmailProvider.formatted_attributes(attributes)
+    assert_equal formatted_attributes[:to], 'rishav rastogi <rishav.rastogi@gmail.com>'
+  end
+
+
 end

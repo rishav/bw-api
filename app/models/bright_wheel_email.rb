@@ -10,10 +10,20 @@ class BrightWheelEmail < ApplicationRecord
 
   before_save :sanitize_body
 
+  after_commit :send_email
+
+  def mailable_attributes
+    {to: to, to_name: to_name, from: from, from_name: from_name, subject: subject, body: body}
+  end
+
   private
 
   def sanitize_body
     self.body = Sanitize.document(body, Sanitize::Config::RELAXED)
+  end
+
+  def send_email
+    EmailProvider.send_email(mailable_attributes)
   end
 
 end

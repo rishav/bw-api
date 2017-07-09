@@ -19,12 +19,12 @@
 
 `rake test`
 
-#Basic Premise
+## Basic Premise
 
 POST requests creates a record of BrightWheelEmail class in the database which triggers a async job (using sidekiq) to send the email.
 There is a EmailProviders table that I use to decide which is the current active email provider ( using the `active` column in the database), if there are muliple active email providers it picks the first one.
 
-#Future Enhancements
+## Future Enhancements
 
 * Cleanup tests
 * EmailProviders should be integrated in ActionMailer and used as a delivery_method

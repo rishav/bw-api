@@ -27,7 +27,7 @@ There is a EmailProviders table that I use to decide which is the current active
 
 ## Future Enhancements
 
-* Cleanup some of the tests, one or two integration tests.
+* Cleanup some of the tests, one or two integration tests. Minor code idioms, like return statements. 
 * There is crummy delegator code in email_provider.rb, needs cleanup
 * This whole thing can integrated into ActionMailer and used as a delivery_method
 * Abstract out MailGun and Sendgrid EmailProvider with base methods and behavior, further enhance this by storing responses from each provider and storing them for review later
